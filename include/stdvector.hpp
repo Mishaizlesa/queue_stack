@@ -1,7 +1,7 @@
 #include<algorithm>
 #include <cmath>
 #include <exception>
-
+#include <initializer_list>
 template<typename T>class stdvector {
 protected:
     unsigned int size = 0;
@@ -22,7 +22,17 @@ public:
         for (int i = 0; i < size; i++) {
             data[i] = other.data[i];
         }
-    };
+    }
+    stdvector(const std::initializer_list<T>& other){
+        size=other.size();
+        capacity=size;
+        data=new T[capacity]();
+        int i=0;
+        for (auto x: other){
+            data[i]=x;
+            i++;
+        }
+    }
     void resize(int n_size){
         size = n_size;
         set_cap(n_size+1);
