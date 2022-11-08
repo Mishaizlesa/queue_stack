@@ -27,10 +27,8 @@ public:
         size=other.size();
         capacity=size;
         data=new T[capacity]();
-        int i=0;
-        for (auto x: other){
-            data[i]=x;
-            i++;
+        for(int i=0;i<size;++i){
+            data[i]=*(other.data()+i);
         }
     }
     void resize(int n_size){
