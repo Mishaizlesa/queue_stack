@@ -22,10 +22,8 @@ public:
         return this->data[this->head];
     }
     void push(T a){
-        if (this->size==this->capacity) throw std::out_of_range("queue owerflow");
-        this->data[this->tail]=a;
+        this->push_back(a);
         this->tail=(this->tail+1)%this->capacity;
-        this->size++;
     }
     void pop(){
         if (this->empty()) throw std::out_of_range("queue is empty");

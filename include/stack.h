@@ -22,7 +22,6 @@ public:
         return this->data[this->size-1];
     }
     void push(T a){
-        if (this->size==this->capacity) throw std::out_of_range("stack owerflow");
         this->push_back(a);
     }
     void pop(){
