@@ -1,3 +1,6 @@
+#ifndef stdvector_h
+#define stdvector_h
+
 #include<algorithm>
 #include <cmath>
 #include <exception>
@@ -9,6 +12,42 @@ protected:
     unsigned int capacity=0;
     const int ch_size=2;
 public:
+    class iterator{
+    private:
+        T* data_it;
+    public:
+        iterator(T* ptr){
+            data_it=ptr;
+        }
+        iterator& operator ++(){
+            data_it+=1;
+            return *this;
+        }
+        iterator operator++(int){
+            auto tmp=iterator(data_it);
+            data_it+=1;
+            return tmp;
+        }
+        iterator& operator --(){
+            data_it-=1;
+            return *this;
+        }
+        iterator operator +(int x){
+            auto tmp=data_it+x;
+            return tmp;
+        }
+        T& operator *(){
+            return *data_it;
+        }friend int operator -(const iterator& x, const iterator& y){
+            return int(x.data_it-y.data_it);
+        }
+        friend bool operator ==(const iterator& x, const iterator& y){
+            return x.data_it==y.data_it;
+        }
+        friend bool operator !=(const iterator& x, const iterator& y){
+            return !(x==y);
+        }
+    };
     stdvector(int num = 0){
         if (num<0) throw std::out_of_range("negative size");
         size = num;
@@ -96,5 +135,13 @@ public:
         }
         size--;
     }
+    iterator begin(){
+        return iterator(data);
+    }
+    iterator end(){
+        return begin()+(size);
+    }
     ~stdvector() {delete[] data;}
 };
+
+#endif /* stdvector_h */
