@@ -31,6 +31,10 @@ public:
         iterator& operator --(){
             data_it-=1;
             return *this;
+        } iterator operator--(int){
+            auto tmp=iterator(data_it);
+            data_it-=1;
+            return tmp;
         }
         iterator operator +(int x){
             auto tmp=data_it+x;
